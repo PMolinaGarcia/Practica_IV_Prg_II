@@ -15,32 +15,27 @@ public class CalculadoraDistancias{
         int long1 = s1.length();
         int long2 = s2.length();
 
-        int distancia = 0;
-
         int[][] matrizDistancias = new int[long1 + 1][long2 + 1];
 
         for (int i = 0; i<=long1; i++){
             matrizDistancias[i][0]=i;
         }
-        for (int j = long2; j>=0; j--){
+        for (int j = 0; j<=long2; j++){
             matrizDistancias[0][j]=j;
         }
 
-        for (int i = 1; i<long1; i++){
-            for (int j = 1; j<long2; j++) {
-                if (getCaracter(s1, i) == getCaracter(s2, j)) {
+        for (int i = 1; i<=long1; i++){
+            for (int j = 1; j<=long2; j++) {
+                if (getCaracter(s1, i-1) == getCaracter(s2, j-1)) {
                     matrizDistancias[i][j] = Math.min(Math.min(matrizDistancias[i - 1][j] + 1, matrizDistancias[i][j - 1] + 1), matrizDistancias[i - 1][j - 1]);
-                    System.out.println("\n\n"+matrizDistancias[i][j]);
+                    System.out.println("\n"+matrizDistancias[i][j]);
                 } else {
                     matrizDistancias[i][j] = Math.min(Math.min(matrizDistancias[i - 1][j] + 1, matrizDistancias[i][j - 1] + 1), matrizDistancias[i - 1][j - 1] + 2);
-                    System.out.println("\n\n"+matrizDistancias[i][j]);
+                    System.out.println("\n"+matrizDistancias[i][j]);
                 }
             }
         }
 
-        distancia+=Math.abs(long1-long2)+matrizDistancias[long1][long2];
-
-        System.out.println(matrizDistancias[long1][long2]);
-        return matrizDistancias[long1-1][long2-1];
+        return matrizDistancias[long1][long2];
     }
 }
